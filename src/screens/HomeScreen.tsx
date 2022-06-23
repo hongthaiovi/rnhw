@@ -64,5 +64,10 @@ HomeScreen.options = {
   topBar: {
     visible: false,
   },
+  statusBar:{
+    style: 'dark',
+    drawBehind: true,
+    backgroundColor: 'rgba(0,0,0,0)',
+  }
 }
 //#endregion

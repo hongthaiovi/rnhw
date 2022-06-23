@@ -23,8 +23,7 @@ export const darkTheme: ITheme = {
     },
     statusBar: {
       style: 'light',
-      drawBehind: true,
-      backgroundColor: 'rgba(0,0,0,0)'
+      backgroundColor: '#3d3d3d',
     },
     navigationBar: {
       backgroundColor: 'rgba(0,0,0,0)'
@@ -52,7 +51,7 @@ export const lightTheme: ITheme = {
     statusBar: {
       style: 'dark',
       drawBehind: true,
-      backgroundColor: 'rgba(0,0,0,0)'
+      backgroundColor: 'white'
     },
     navigationBar: {
       backgroundColor: 'rgba(0,0,0,0)'
