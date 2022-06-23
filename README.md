@@ -28,3 +28,7 @@ You took the role to develop a React Native app which has the following features
 - When user taps on a country on the continent screen, show the country screen again
 - When user visits [rnhw://country/:code](rnhw://country/:code), show country screen
 - When user visits [rnhw://continent/:code](rnhw://continent/:code), show continent screen.
+
+## Demo
+- [Demo feature video](https://github.com/hongthaiovi/rnhw/blob/master/demo/demo-features.mov)
+- [Demo deeplink video](https://github.com/hongthaiovi/rnhw/blob/master/demo/demo-deeplink.mov?raw=true)
