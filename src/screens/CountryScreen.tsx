@@ -8,7 +8,7 @@ import styled from 'styled-components/native';
 import {getScreenStyle} from '~/theme/getScreenStyle';
 import AnimatedBackground from '~/components/AnimatedBackground';
 import { Navigation } from 'react-native-navigation';
-import screens from '~/navigation/screens';
+import {SCREENS, STACK_IDS} from '~/navigation/screens';
 
 export const CountryScreen = ({code}: Props) => {
   const {data} = useGetCountryQuery({
@@ -38,9 +38,9 @@ export const CountryScreen = ({code}: Props) => {
   );
 
   const onPress = useCallback(() => {
-    Navigation.push(screens.COUNTRY.id, {
+    Navigation.push(STACK_IDS.MAIN, {
       component: {
-        ...screens.CONTINENT,
+        name: SCREENS.CONTINENT,
         passProps: {
           code: data!.country!.continent.code,
         }

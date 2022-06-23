@@ -6,7 +6,7 @@ import { CountryScreen } from '~/screens/CountryScreen';
 import { ContinentScreen } from '~/screens/ContinentScreen';
 import { apolloClient } from '~/graphql/client';
 import { ApolloProvider } from '@apollo/client';
-import screens from '~/navigation/screens';
+import {SCREENS} from '~/navigation/screens';
 import { ThemeProvider } from '~/theme/useTheme';
 import ChangeThemeButton from '~/components/ChangeThemeButton';
 
@@ -24,8 +24,8 @@ function WrappedComponent(Component: (props: any) => JSX.Element) {
 }
 
 export const registerScreens = () => {
-  Navigation.registerComponent(screens.HOME.name, () => WrappedComponent(HomeScreen), () => HomeScreen);
-  Navigation.registerComponent(screens.COUNTRY.name, () => WrappedComponent(CountryScreen), () => CountryScreen);
-  Navigation.registerComponent(screens.CONTINENT.name, () => WrappedComponent(ContinentScreen), () => ContinentScreen);
-  Navigation.registerComponent(screens.FAB.name, () => WrappedComponent(ChangeThemeButton), () => ChangeThemeButton);
+  Navigation.registerComponent(SCREENS.HOME, () => WrappedComponent(HomeScreen), () => HomeScreen);
+  Navigation.registerComponent(SCREENS.COUNTRY, () => WrappedComponent(CountryScreen), () => CountryScreen);
+  Navigation.registerComponent(SCREENS.CONTINENT, () => WrappedComponent(ContinentScreen), () => ContinentScreen);
+  Navigation.registerComponent(SCREENS.FAB, () => WrappedComponent(ChangeThemeButton), () => ChangeThemeButton);
 }

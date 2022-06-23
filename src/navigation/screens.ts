@@ -1,18 +1,9 @@
-export default {
-    HOME: {
-        name: 'HOME',
-        id: 'HOME',
-    },
-    COUNTRY: {
-        name: 'COUNTRY',
-        id: 'COUNTRY',
-    },
-    CONTINENT: {
-        name: 'CONTINENT',
-        id: 'CONTINENT',
-    },
-    FAB: {
-        name: 'FAB',
-        id: 'FAB',
-    },
+export const SCREENS = {
+    HOME: 'HOME',
+    COUNTRY: 'COUNTRY',
+    CONTINENT: 'CONTINENT',
+    FAB: 'FAB',
+}
+export const STACK_IDS = {
+    MAIN: 'HOME',
 }

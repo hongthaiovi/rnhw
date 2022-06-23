@@ -1,19 +1,22 @@
 const { Navigation } = require("react-native-navigation");
 const { registerScreens } = require("~/navigation/registerScreens");
-const { default: screens } = require("~/navigation/screens");
+const { SCREENS, STACK_IDS } = require("~/navigation/screens");
 
 registerScreens()
 
 Navigation.events().registerAppLaunchedListener(() => {
-  
+
   Navigation.setRoot({
     root: {
       stack: {
         children: [
           {
-            component: screens.HOME
+            component: {
+              name: SCREENS.HOME,
+            }
           },
         ],
+        id: STACK_IDS.MAIN,
       }
     },
   });

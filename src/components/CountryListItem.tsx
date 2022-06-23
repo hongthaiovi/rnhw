@@ -2,7 +2,7 @@ import React, { memo, useCallback, useMemo } from 'react';
 import { Navigation } from 'react-native-navigation';
 // @ts-ignore
 import styled from 'styled-components/native';
-import screens from '~/navigation/screens';
+import {SCREENS, STACK_IDS} from '~/navigation/screens';
 import { useTheme } from '~/theme/useTheme';
 
 const CountryListItem = ({
@@ -13,9 +13,9 @@ const CountryListItem = ({
 }: CountryListItemProps) => {
 
   const onItemPress = useCallback(() => {
-    Navigation.push(screens.HOME.id, {
+    Navigation.push(STACK_IDS.MAIN, {
       component: {
-        ...screens.COUNTRY,
+        name: SCREENS.COUNTRY,
         passProps: {
           code
         }

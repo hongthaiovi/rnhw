@@ -3,29 +3,20 @@ import { TouchableOpacity } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 // @ts-ignore
 import styled from 'styled-components/native';
-import screens from '~/navigation/screens';
-import { IS_IOS } from '~/utils/constants';
+import {SCREENS, STACK_IDS} from '~/navigation/screens';
 
 const ContinentListItem = ({ code, name }: ContinentListItemProps) => {
-  const onItemPress = useCallback(async () => {
-    // android can't push more screen
-    if (!IS_IOS) {
-      await Navigation.pop(screens.CONTINENT.id);
-      Navigation.updateProps(screens.COUNTRY.id, {
-        code
-      });
-    } else {
-      Navigation.push(screens.CONTINENT.id,
-        {
-          component: {
-            ...screens.COUNTRY,
-            passProps: {
-              code,
-            }
+  const onItemPress = useCallback(() => {
+    Navigation.push(STACK_IDS.MAIN,
+      {
+        component: {
+          name: SCREENS.COUNTRY,
+          passProps: {
+            code,
           }
         }
-      )
-    }
+      }
+    )
   }, [code]);
 
   return (

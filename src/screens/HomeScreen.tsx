@@ -8,7 +8,7 @@ import ContriesList from '~/components/ContriesList';
 import AnimatedBackground from '~/components/AnimatedBackground';
 import { getScreenStyle } from '~/theme/getScreenStyle';
 import { Navigation } from 'react-native-navigation';
-import screens from '~/navigation/screens';
+import {SCREENS} from '~/navigation/screens';
 import { useTheme } from '~/theme/useTheme';
 import { handleDeeplink } from '~/navigation/handleDeeplink';
 
@@ -26,7 +26,10 @@ export const HomeScreen = ({ }: HomeScreenProps) => {
   useEffect(() => {
     onRefresh();
     Navigation.showOverlay({
-      component: screens.FAB
+      component: {
+        name: SCREENS.FAB,
+        id: SCREENS.FAB,
+      }
     })
     const eventListener = Linking.addEventListener('url', handleDeeplink);
     return eventListener;
