@@ -6,12 +6,25 @@ import {useTheme} from '~/theme/useTheme';
 import {Options} from 'react-native-navigation';
 import styled from 'styled-components/native';
 import {SAFE_FOOTER, WIDTH} from '~/utils/constants';
+import {Animated} from 'react-native';
+import {useRef} from 'react';
+import {useEffect} from 'react';
 
 const ChangeThemeButton = ({}: ChangeThemeButtonProps) => {
-  const {isDark, setTheme, colors} = useTheme();
+  const {isDark, setTheme, colors, isFabLeft} = useTheme();
   const onChangeTheme = useCallback(() => {
     isDark ? setTheme('light') : setTheme('dark');
   }, [setTheme, isDark]);
+
+  const position = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    Animated.spring(position, {
+      toValue: isFabLeft ? 0 : 1,
+      useNativeDriver: true,
+    }).start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFabLeft]);
 
   const Button = useMemo(
     () => styled.TouchableOpacity`
@@ -26,9 +39,6 @@ const ChangeThemeButton = ({}: ChangeThemeButtonProps) => {
       justify-content: center;
       align-items: center;
       elevation: 7;
-      position: absolute;
-      bottom: ${SAFE_FOOTER + 20}px;
-      right: 20px;
     `,
     [colors],
   );
@@ -41,15 +51,27 @@ const ChangeThemeButton = ({}: ChangeThemeButtonProps) => {
   );
 
   return (
-    <Button onPress={onChangeTheme}>
-      <Image source={isDark ? icDark : icLight} />
-    </Button>
+    <Animated.View
+      style={{
+        position: 'absolute',
+        bottom: SAFE_FOOTER + 20,
+        right: 20,
+        transform: [
+          {
+            translateX: position.interpolate({
+              inputRange: [0, 1],
+              outputRange: [-(WIDTH - 110), 0],
+            }),
+          },
+        ],
+      }}>
+      <Button onPress={onChangeTheme}>
+        <Image source={isDark ? icDark : icLight} />
+      </Button>
+    </Animated.View>
   );
 };
 
-const Root = styled.View`
-  flex: 1;
-`;
 interface ChangeThemeButtonProps {}
 ChangeThemeButton.options = {
   overlay: {

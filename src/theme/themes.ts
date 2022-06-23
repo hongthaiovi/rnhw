@@ -16,9 +16,9 @@ export const lightTheme: ITheme = {
         color: 'white',
       },
       backButton: {
-        color: '#2e55ff'
+        color: '#2e55ff',
       },
-      barStyle: 'default'
+      barStyle: 'default',
     },
     navigationBar: {
       backgroundColor: 'white',
@@ -40,7 +40,7 @@ export const darkTheme: ITheme = {
       },
       barStyle: 'black',
       backButton: {
-        color: '#2e55ff'
+        color: '#2e55ff',
       },
     },
     navigationBar: {

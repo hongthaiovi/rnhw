@@ -1,22 +1,22 @@
 // import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, { useCallback, useMemo } from 'react';
-import { StatusBar, TouchableOpacity } from 'react-native';
-import { useGetCountryQuery } from '~/graphql/service';
-import { useTheme } from '~/theme/useTheme';
+import React, {useCallback, useMemo} from 'react';
+import {StatusBar, TouchableOpacity} from 'react-native';
+import {useGetCountryQuery} from '~/graphql/service';
+import {useTheme} from '~/theme/useTheme';
 // @ts-ignore
 import styled from 'styled-components/native';
-import { Navigation } from 'react-native-navigation';
-import { SCREENS, STACK_IDS } from '~/navigation/screens';
+import {Navigation} from 'react-native-navigation';
+import {SCREENS, STACK_IDS} from '~/navigation/screens';
 import AnimatedBackground from '~/components/AnimatedBackground';
 
-export const CountryScreen = ({ code }: Props) => {
-  const { data } = useGetCountryQuery({
+export const CountryScreen = ({code}: Props) => {
+  const {data} = useGetCountryQuery({
     variables: {
       code,
     },
   });
 
-  const { colors, isDark } = useTheme();
+  const {colors, isDark} = useTheme();
 
   const TitleText = useMemo(
     () => styled.Text`

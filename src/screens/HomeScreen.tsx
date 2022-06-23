@@ -15,18 +15,15 @@ import AnimatedBackground from '~/components/AnimatedBackground';
 export const HomeScreen = ({}: HomeScreenProps) => {
   const [getCountriesLazyQuery, {data, loading}] = useGetCountriesLazyQuery();
   const offset = useRef(new Animated.Value(0)).current;
-  const {isDark} = useTheme();
+  const {isDark, setButtonPosition} = useTheme();
 
   const onRefresh = useCallback(() => {
     getCountriesLazyQuery();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    const options = getScreenStyle(isDark ? 'dark' : 'light')
-    Navigation.mergeOptions(
-      STACK_IDS.MAIN,
-      options
-    );
+    const options = getScreenStyle(isDark ? 'dark' : 'light');
+    Navigation.mergeOptions(STACK_IDS.MAIN, options);
   }, [isDark]);
 
   useEffect(() => {
@@ -38,7 +35,20 @@ export const HomeScreen = ({}: HomeScreenProps) => {
       },
     });
     const eventListener = Linking.addEventListener('url', handleDeeplink);
-    return eventListener;
+    const screenEventListener = Navigation.events().registerComponentWillAppearListener(
+      ({componentName}) => {
+        if (componentName == SCREENS.HOME) {
+          setButtonPosition(false);
+        } else if (componentName == SCREENS.CONTINENT) {
+          setButtonPosition(true);
+        }
+      },
+    );
+    return () => {
+      screenEventListener.remove();
+      //@ts-ignore
+      eventListener();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -76,5 +86,5 @@ HomeScreen.options = {
     drawBehind: true,
     backgroundColor: 'transparent',
   },
-}
+};
 //#endregion

@@ -6,7 +6,9 @@ import shortid from 'shortid';
 declare type ThemeProviderProps = {
   isDark: boolean;
   colors: ITheme;
+  isFabLeft: boolean;
   setTheme: Function;
+  setButtonPosition: Function;
 };
 let ThemeContextProviderInstances: any = {};
 
@@ -18,10 +20,19 @@ const setTheme = (theme: 'light' | 'dark') => {
   }
 };
 
+const setButtonPosition = (isFabLeft: boolean) => {
+  globalStateValue.isFabLeft = isFabLeft;
+  for (let instanceId in ThemeContextProviderInstances) {
+    ThemeContextProviderInstances[instanceId].forceUpdate();
+  }
+};
+
 const initialState: ThemeProviderProps = {
   isDark: false,
+  isFabLeft: false,
   colors: lightTheme,
   setTheme: setTheme,
+  setButtonPosition: setButtonPosition,
 };
 
 const globalStateValue: ThemeProviderProps = initialState;
@@ -62,8 +73,11 @@ export class ThemeProvider extends React.Component {
   render() {
     const value = {
       setTheme: setTheme,
+      setButtonPosition: setButtonPosition,
       // @ts-ignore
       isDark: this.state?.context?.isDark,
+      // @ts-ignore
+      isFabLeft: this.state?.context?.isFabLeft,
       // @ts-ignore
       colors: this.state?.context?.colors,
     };

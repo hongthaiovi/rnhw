@@ -1,21 +1,21 @@
-import React, { useMemo } from 'react';
-import { FlatList, StatusBar, View } from 'react-native';
+import React, {useMemo} from 'react';
+import {FlatList, StatusBar, View} from 'react-native';
 import ContinentListItem from '~/components/ContinentListItem';
-import { useGetContinentQuery } from '~/graphql/service';
-import { useTheme } from '~/theme/useTheme';
+import {useGetContinentQuery} from '~/graphql/service';
+import {useTheme} from '~/theme/useTheme';
 // @ts-ignorer
 import styled from 'styled-components/native';
-import { STATUS_BAR_HEIGHT } from '~/utils/constants';
+import {STATUS_BAR_HEIGHT} from '~/utils/constants';
 import AnimatedBackground from '~/components/AnimatedBackground';
 
-export const ContinentScreen = ({ code }: ContinentScreenProps) => {
-  const { data } = useGetContinentQuery({
+export const ContinentScreen = ({code}: ContinentScreenProps) => {
+  const {data} = useGetContinentQuery({
     variables: {
       code,
     },
   });
 
-  const { colors, isDark } = useTheme();
+  const {colors, isDark} = useTheme();
   const TitleText = useMemo(
     () => styled.Text`
       align-self: center;
@@ -57,7 +57,7 @@ export const ContinentScreen = ({ code }: ContinentScreenProps) => {
         }
         showsVerticalScrollIndicator={false}
         data={data?.continent?.countries}
-        renderItem={({ item, index }) => (
+        renderItem={({item, index}) => (
           <Info>
             {index === 0 ? <InfoText>countries</InfoText> : <View />}
             <ContinentListItem code={item.code} name={item.name} />
