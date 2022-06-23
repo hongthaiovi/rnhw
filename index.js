@@ -1,19 +1,20 @@
-import {Navigation} from 'react-native-navigation';
-import {HomeScreen} from '~/HomeScreen';
+const { Navigation } = require("react-native-navigation");
+const { registerScreens } = require("~/navigation/registerScreens");
+const { default: screens } = require("~/navigation/screens");
 
-Navigation.registerComponent('HomeScreen', () => HomeScreen);
+registerScreens()
+
 Navigation.events().registerAppLaunchedListener(() => {
+  
   Navigation.setRoot({
     root: {
       stack: {
         children: [
           {
-            component: {
-              name: 'HomeScreen',
-            },
+            component: screens.HOME
           },
         ],
-      },
+      }
     },
   });
 });
