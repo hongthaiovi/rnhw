@@ -30,5 +30,6 @@ You took the role to develop a React Native app which has the following features
 - When user visits [rnhw://continent/:code](rnhw://continent/:code), show continent screen.
 
 ## Demo
-- [Demo feature video](https://github.com/hongthaiovi/rnhw/blob/master/demo/demo-features.mov)
+- [Demo feature video](https://github.com/hongthaiovi/rnhw/blob/master/demo/demo-features.mov?raw=true)
 - [Demo deeplink video](https://github.com/hongthaiovi/rnhw/blob/master/demo/demo-deeplink.mov?raw=true)
+- [Download Android Apk](https://github.com/hongthaiovi/rnhw/releases/download/v1.0/thai-rnhw-1.0.apk)
