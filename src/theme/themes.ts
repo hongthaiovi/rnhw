@@ -1,5 +1,4 @@
-
-import { Options } from 'react-native-navigation';
+import {Options} from 'react-native-navigation';
 export interface ITheme {
   backgroundColor: string;
   textColor: string;
@@ -7,57 +6,48 @@ export interface ITheme {
   screenTheme: Options;
 }
 
-export const darkTheme: ITheme = {
-  backgroundColor: '#3d3d3d',
-  textColor: '#fafafa',
-  shadowColor: '#f1f1f1',
-  screenTheme:  {
-    topBar: {
-      // visible: false,
-      background: {
-        color: '#3d3d3d',
-      },
-      noBorder: false,
-      borderColor: '#fff',
-      borderHeight: 1,
-    },
-    statusBar: {
-      style: 'light',
-      backgroundColor: '#3d3d3d',
-    },
-    navigationBar: {
-      backgroundColor: 'rgba(0,0,0,0)'
-    },
-    layout: {
-      backgroundColor: '#3d3d3d',
-    },
-  }
-};
-
 export const lightTheme: ITheme = {
   backgroundColor: 'white',
   textColor: '#3d3d3d',
   shadowColor: '#3d3d3d',
-  screenTheme:  {
+  screenTheme: {
     topBar: {
-      // visible: false,
       background: {
         color: 'white',
       },
-      noBorder: false,
-      borderColor: '#ccc',
-      borderHeight: 1,
-    },
-    statusBar: {
-      style: 'dark',
-      drawBehind: true,
-      backgroundColor: 'white'
+      backButton: {
+        color: '#2e55ff'
+      },
+      barStyle: 'default'
     },
     navigationBar: {
-      backgroundColor: 'rgba(0,0,0,0)'
+      backgroundColor: 'white',
     },
     layout: {
       backgroundColor: 'white',
     },
-  }
+  },
+};
+
+export const darkTheme: ITheme = {
+  backgroundColor: '#3d3d3d',
+  textColor: '#fafafa',
+  shadowColor: '#fff',
+  screenTheme: {
+    topBar: {
+      background: {
+        color: '#3d3d3d',
+      },
+      barStyle: 'black',
+      backButton: {
+        color: '#2e55ff'
+      },
+    },
+    navigationBar: {
+      backgroundColor: '#3d3d3d',
+    },
+    layout: {
+      backgroundColor: '#3d3d3d',
+    },
+  },
 };

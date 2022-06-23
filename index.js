@@ -5,7 +5,6 @@ const { SCREENS, STACK_IDS } = require("~/navigation/screens");
 registerScreens()
 
 Navigation.events().registerAppLaunchedListener(() => {
-
   Navigation.setRoot({
     root: {
       stack: {

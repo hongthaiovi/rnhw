@@ -1,27 +1,33 @@
-import React, { useCallback, useEffect, useRef } from 'react';
-import { Animated, StatusBar, Linking } from 'react-native';
-import { useGetCountriesLazyQuery } from '~/graphql/service';
+import React, {useCallback, useEffect, useRef} from 'react';
+import {Animated, StatusBar, Linking} from 'react-native';
+import {useGetCountriesLazyQuery} from '~/graphql/service';
 // @ts-ignore
 import styled from 'styled-components/native';
 import AnimatedHeader from '~/components/AnimatedHeader';
 import ContriesList from '~/components/ContriesList';
+import {getScreenStyle} from '~/theme/getScreenStyle';
+import {Navigation} from 'react-native-navigation';
+import {SCREENS, STACK_IDS} from '~/navigation/screens';
+import {useTheme} from '~/theme/useTheme';
+import {handleDeeplink} from '~/navigation/handleDeeplink';
 import AnimatedBackground from '~/components/AnimatedBackground';
-import { getScreenStyle } from '~/theme/getScreenStyle';
-import { Navigation } from 'react-native-navigation';
-import {SCREENS} from '~/navigation/screens';
-import { useTheme } from '~/theme/useTheme';
-import { handleDeeplink } from '~/navigation/handleDeeplink';
 
-export const SCREEN_ID = 'HomeScreen';
-export const HomeScreen = ({ }: HomeScreenProps) => {
-  const [getCountriesLazyQuery, { data, loading }] = useGetCountriesLazyQuery();
+export const HomeScreen = ({}: HomeScreenProps) => {
+  const [getCountriesLazyQuery, {data, loading}] = useGetCountriesLazyQuery();
   const offset = useRef(new Animated.Value(0)).current;
-  const theme = useTheme()
+  const {isDark} = useTheme();
 
   const onRefresh = useCallback(() => {
     getCountriesLazyQuery();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    const options = getScreenStyle(isDark ? 'dark' : 'light')
+    Navigation.mergeOptions(
+      STACK_IDS.MAIN,
+      options
+    );
+  }, [isDark]);
 
   useEffect(() => {
     onRefresh();
@@ -29,8 +35,8 @@ export const HomeScreen = ({ }: HomeScreenProps) => {
       component: {
         name: SCREENS.FAB,
         id: SCREENS.FAB,
-      }
-    })
+      },
+    });
     const eventListener = Linking.addEventListener('url', handleDeeplink);
     return eventListener;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -63,14 +69,12 @@ const Root = styled.View`
   flex: 1;
 `;
 HomeScreen.options = {
-  ...getScreenStyle(),
   topBar: {
     visible: false,
   },
-  statusBar:{
-    style: 'dark',
+  statusBar: {
     drawBehind: true,
-    backgroundColor: 'rgba(0,0,0,0)',
-  }
+    backgroundColor: 'transparent',
+  },
 }
 //#endregion

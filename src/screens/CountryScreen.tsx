@@ -1,23 +1,22 @@
 // import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {useCallback, useEffect, useMemo} from 'react';
-import {TouchableOpacity} from 'react-native';
-import {useGetCountryQuery} from '~/graphql/service';
-import {useTheme} from '~/theme/useTheme';
+import React, { useCallback, useMemo } from 'react';
+import { StatusBar, TouchableOpacity } from 'react-native';
+import { useGetCountryQuery } from '~/graphql/service';
+import { useTheme } from '~/theme/useTheme';
 // @ts-ignore
 import styled from 'styled-components/native';
-import {getScreenStyle} from '~/theme/getScreenStyle';
-import AnimatedBackground from '~/components/AnimatedBackground';
 import { Navigation } from 'react-native-navigation';
-import {SCREENS, STACK_IDS} from '~/navigation/screens';
+import { SCREENS, STACK_IDS } from '~/navigation/screens';
+import AnimatedBackground from '~/components/AnimatedBackground';
 
-export const CountryScreen = ({code}: Props) => {
-  const {data} = useGetCountryQuery({
+export const CountryScreen = ({ code }: Props) => {
+  const { data } = useGetCountryQuery({
     variables: {
-      code
+      code,
     },
   });
 
-  const {colors} = useTheme();
+  const { colors, isDark } = useTheme();
 
   const TitleText = useMemo(
     () => styled.Text`
@@ -43,13 +42,19 @@ export const CountryScreen = ({code}: Props) => {
         name: SCREENS.CONTINENT,
         passProps: {
           code: data!.country!.continent.code,
-        }
-      }
+        },
+      },
     });
   }, [data]);
 
   return (
     <Root>
+      <StatusBar
+        translucent
+        animated
+        backgroundColor={colors.backgroundColor}
+        barStyle={isDark ? 'light-content' : 'dark-content'}
+      />
       <AnimatedBackground />
       <Header>
         <FlagText>{data?.country?.emoji || ' '}</FlagText>
@@ -75,7 +80,7 @@ export const CountryScreen = ({code}: Props) => {
 
 //#region
 type Props = {
-  code: string,
+  code: string;
 };
 const Root = styled.View`
   flex: 1;
@@ -101,6 +106,4 @@ const ContinentText = styled.Text`
 const FlagText = styled.Text`
   font-size: 70px;
 `;
-
-CountryScreen.options = getScreenStyle();
 //#endregion

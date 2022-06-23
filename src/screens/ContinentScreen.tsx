@@ -1,13 +1,12 @@
 import React, { useMemo } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, StatusBar, View } from 'react-native';
 import ContinentListItem from '~/components/ContinentListItem';
 import { useGetContinentQuery } from '~/graphql/service';
 import { useTheme } from '~/theme/useTheme';
 // @ts-ignorer
 import styled from 'styled-components/native';
-import AnimatedBackground from '~/components/AnimatedBackground';
 import { STATUS_BAR_HEIGHT } from '~/utils/constants';
-import { getScreenStyle } from '~/theme/getScreenStyle';
+import AnimatedBackground from '~/components/AnimatedBackground';
 
 export const ContinentScreen = ({ code }: ContinentScreenProps) => {
   const { data } = useGetContinentQuery({
@@ -16,7 +15,7 @@ export const ContinentScreen = ({ code }: ContinentScreenProps) => {
     },
   });
 
-  const { colors } = useTheme();
+  const { colors, isDark } = useTheme();
   const TitleText = useMemo(
     () => styled.Text`
       align-self: center;
@@ -39,6 +38,12 @@ export const ContinentScreen = ({ code }: ContinentScreenProps) => {
 
   return (
     <Root>
+      <StatusBar
+        translucent
+        animated
+        backgroundColor={colors.backgroundColor}
+        barStyle={isDark ? 'light-content' : 'dark-content'}
+      />
       <AnimatedBackground />
       <FlatList
         ListHeaderComponent={
@@ -67,7 +72,7 @@ export const ContinentScreen = ({ code }: ContinentScreenProps) => {
 
 //#region
 type ContinentScreenProps = {
-  code: string,
+  code: string;
 };
 
 const Root = styled.View`
@@ -84,5 +89,4 @@ const Info = styled.View`
   padding-horizontal: 15px;
   padding-top: 3px;
 `;
-ContinentScreen.options = getScreenStyle();
 //#endregion

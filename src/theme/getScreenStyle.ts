@@ -1,6 +1,6 @@
-import { Platform, Appearance} from 'react-native';
-import { Options } from 'react-native-navigation';
-import { icDark, icLight } from '~/assets/images';
-import { lightTheme } from '~/theme/themes';
+import {Options} from 'react-native-navigation';
+import {darkTheme, lightTheme} from '~/theme/themes';
 
-export const getScreenStyle: () => Options = () => (lightTheme.screenTheme)
+export const getScreenStyle: (theme: 'light' | 'dark') => Options = theme => {
+  return theme == 'dark' ? darkTheme.screenTheme : lightTheme.screenTheme;
+};

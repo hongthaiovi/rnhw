@@ -1,9 +1,9 @@
-import React, { memo, useCallback, useMemo } from 'react';
-import { Navigation } from 'react-native-navigation';
+import React, {memo, useCallback, useMemo} from 'react';
+import {Navigation} from 'react-native-navigation';
 // @ts-ignore
 import styled from 'styled-components/native';
 import {SCREENS, STACK_IDS} from '~/navigation/screens';
-import { useTheme } from '~/theme/useTheme';
+import {useTheme} from '~/theme/useTheme';
 
 const CountryListItem = ({
   code,
@@ -11,19 +11,18 @@ const CountryListItem = ({
   capital,
   emoji,
 }: CountryListItemProps) => {
-
   const onItemPress = useCallback(() => {
     Navigation.push(STACK_IDS.MAIN, {
       component: {
         name: SCREENS.COUNTRY,
         passProps: {
-          code
-        }
-      }
+          code,
+        },
+      },
     });
   }, [code]);
 
-  const { colors } = useTheme();
+  const {colors} = useTheme();
 
   const Root = useMemo(
     () => styled.TouchableOpacity`

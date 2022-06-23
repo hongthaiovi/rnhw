@@ -1,13 +1,14 @@
-import React, { useCallback, useContext, useMemo } from 'react';
-import { icDark, icLight } from '~/assets/images';
-import { useTheme,ThemeContext } from '~/theme/useTheme';
-// @ts-ignore
-import { Options } from 'react-native-navigation';
-import styled from 'styled-components/native';
-import { SAFE_FOOTER, WIDTH } from '~/utils/constants';
+import React, {useCallback, useMemo} from 'react';
+import {icDark, icLight} from '~/assets/images';
+import {useTheme} from '~/theme/useTheme';
 
-const ChangeThemeButton = ({ }: ChangeThemeButtonProps) => {
-  const { isDark, setTheme, colors } =  useContext(ThemeContext);// useTheme();
+// @ts-ignore
+import {Options} from 'react-native-navigation';
+import styled from 'styled-components/native';
+import {SAFE_FOOTER, WIDTH} from '~/utils/constants';
+
+const ChangeThemeButton = ({}: ChangeThemeButtonProps) => {
+  const {isDark, setTheme, colors} = useTheme();
   const onChangeTheme = useCallback(() => {
     isDark ? setTheme('light') : setTheme('dark');
   }, [setTheme, isDark]);
@@ -19,6 +20,7 @@ const ChangeThemeButton = ({ }: ChangeThemeButtonProps) => {
       border-radius: 35px;
       shadow-opacity: 0.2;
       shadow-radius: 7px;
+      shadow-offset: 0 7px;
       background-color: ${colors.backgroundColor};
       shadow-color: ${colors.shadowColor};
       justify-content: center;
@@ -26,7 +28,7 @@ const ChangeThemeButton = ({ }: ChangeThemeButtonProps) => {
       elevation: 7;
       position: absolute;
       bottom: ${SAFE_FOOTER + 20}px;
-      right: 20px
+      right: 20px;
     `,
     [colors],
   );
@@ -47,11 +49,11 @@ const ChangeThemeButton = ({ }: ChangeThemeButtonProps) => {
 
 const Root = styled.View`
   flex: 1;
-`
-interface ChangeThemeButtonProps { }
+`;
+interface ChangeThemeButtonProps {}
 ChangeThemeButton.options = {
   overlay: {
-    interceptTouchOutside: false
+    interceptTouchOutside: false,
   },
   topBar: {
     visible: false,
@@ -59,6 +61,6 @@ ChangeThemeButton.options = {
   layout: {
     backgroundColor: 'rgba(0,0,0,0)',
     componentBackgroundColor: 'transparent',
-  }
+  },
 } as Options;
-export default ChangeThemeButton
+export default ChangeThemeButton;
